@@ -35,7 +35,7 @@ Butuh: `gcc`, `nasm`, `ld` (biasanya sudah ada di Linux, atau lewat `build-essen
 
 ```bash
 sudo apt install build-essential nasm   # kalau belum ada
-git clone <url-repo-ini>
+git clone https://github.com/khairililmi2468gmailcom/gayo-lang.git
 cd gayo-lang
 make
 ```
