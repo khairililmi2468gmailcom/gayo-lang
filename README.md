@@ -182,9 +182,9 @@ gayo-lang/
 └── README.md
 ```
 
-## Pencipta
+## Gayo Programming Language
 
-Gayo dicetuskan dan dikembangkan oleh **Khairil Ilmi**.
+**Gayo Programming Language** dikembangkan oleh **Khairil Ilmi**, dengan tujuan menghadirkan bahasa pemrograman native yang menggunakan kata kunci yang terinspirasi dari Bahasa Gayo.
 
 ## Lisensi
 
