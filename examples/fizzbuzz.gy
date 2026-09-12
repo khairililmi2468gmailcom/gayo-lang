@@ -1,0 +1,14 @@
+!! FizzBuzz klasik, gaya Gayo
+ara i = 1;
+iwan (i lebih kucak dis urum 30) {
+    ike ((i bagi 15 kali 15) dis i) {
+        turuhen "FizzBuzz";
+    } ike gere ((i bagi 3 kali 3) dis i) {
+        turuhen "Fizz";
+    } ike gere ((i bagi 5 kali 5) dis i) {
+        turuhen "Buzz";
+    } kegere {
+        turuhen i;
+    }
+    i = i tamah 1;
+}

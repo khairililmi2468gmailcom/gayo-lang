@@ -1,0 +1,6 @@
+# Hasil build, tidak perlu ikut di-commit
+gayoc
+*.o
+*.asm
+examples/*.o
+examples/*.asm

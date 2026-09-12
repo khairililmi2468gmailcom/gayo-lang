@@ -1,0 +1,10 @@
+!! Contoh variabel dan berbagai tipe data
+ara nama = "Khairil";
+ara umur = 25;
+isen phi = 3.14;
+ara sudah_lulus = enggeh;
+
+turuhen "Nama:"; turuhen nama;
+turuhen "Umur:"; turuhen umur;
+turuhen "Phi:"; turuhen phi;
+turuhen "Sudah lulus?"; turuhen sudah_lulus;

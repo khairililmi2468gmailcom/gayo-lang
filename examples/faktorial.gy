@@ -1,0 +1,13 @@
+!! Fungsi rekursif: hitung faktorial
+kinsa faktorial(n) {
+    ike (n lebih kucak dis urum 1) {
+        ulaken 1;
+    }
+    ulaken n kali faktorial(n kurang 1);
+}
+
+ara i = 0;
+iwan (i lebih kucak dis urum 10) {
+    turuhen faktorial(i);
+    i = i tamah 1;
+}

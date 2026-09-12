@@ -1,0 +1,49 @@
+!! ============================================================
+!! cinta_gayo.gy
+!! Menggambar bentuk hati (love) dari tanda bintang (*) pakai
+!! loop 'kin', dan mencetak pesan cinta untuk bahasa Gayo.
+!! ============================================================
+
+turuhen "";
+
+!! --- Gambar hati pakai loop 'kin' (for) + 'ike/ike gere' (if/elseif) ---
+!! i berjalan dari baris 1 sampai 7, tiap baris punya pola bintang
+!! yang beda -> disatukan lewat percabangan di dalam satu loop yang sama.
+kin (ara i = 1; i lebih kucak dis urum 7; i = i tamah 1) {
+    ike (i dis 1) {
+        turuhen " **   ** ";
+    } ike gere (i dis 2) {
+        turuhen "*********";
+    } ike gere (i dis 3) {
+        turuhen "*********";
+    } ike gere (i dis 4) {
+        turuhen " ******* ";
+    } ike gere (i dis 5) {
+        turuhen "  *****  ";
+    } ike gere (i dis 6) {
+        turuhen "   ***   ";
+    } kegere {
+        turuhen "    *    ";
+    }
+}
+
+turuhen "";
+turuhen "     Aku Cinta Gayo!";
+turuhen "  Bahasa pemrograman asli dari Tanoh Gayo";
+turuhen "";
+
+!! --- Bonus: hitung berapa banyak '*' yang baru saja dicetak, pakai loop lagi ---
+ara total_baris = 7;
+ara total_bintang = 0;
+kin (ara j = 1; j lebih kucak dis urum total_baris; j = j tamah 1) {
+    ike (j dis 1) { total_bintang = total_bintang tamah 4; }
+    ike gere (j dis 2) { total_bintang = total_bintang tamah 9; }
+    ike gere (j dis 3) { total_bintang = total_bintang tamah 9; }
+    ike gere (j dis 4) { total_bintang = total_bintang tamah 7; }
+    ike gere (j dis 5) { total_bintang = total_bintang tamah 5; }
+    ike gere (j dis 6) { total_bintang = total_bintang tamah 3; }
+    kegere { total_bintang = total_bintang tamah 1; }
+}
+
+turuhen "Total bintang di hati ini:";
+turuhen total_bintang;

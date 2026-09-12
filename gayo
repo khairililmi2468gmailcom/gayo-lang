@@ -1,0 +1,122 @@
+#!/usr/bin/env bash
+# ============================================================
+# gayo - command line runner untuk bahasa pemrograman Gayo
+# ------------------------------------------------------------
+# Pemakaian:
+#   gayo namafile.gy              -> compile & langsung jalankan
+#   gayo namafile.gy -o output    -> compile, simpan biner sbg
+#                                     'output', tidak dijalankan
+#   gayo namafile.gy --asm        -> tampilkan hasil generate
+#                                     assembly-nya saja
+#
+# Alur di balik layar:
+#   namafile.gy -> gayoc (compiler kita) -> .asm
+#               -> nasm (assembler)      -> .o
+#               -> ld (linker)           -> biner ELF asli
+#               -> dijalankan langsung oleh CPU
+# ============================================================
+
+set -e
+
+VERSI_GAYO="0.1.0"
+
+if [ "$1" = "--version" ] || [ "$1" = "-V" ]; then
+    echo "gayo $VERSI_GAYO"
+    exit 0
+fi
+
+if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+    echo "Pemakaian: gayo namafile.gy [-o output] [--asm]"
+    echo "           gayo --version | -V"
+    echo "           gayo --help    | -h"
+    exit 0
+fi
+
+# Cari lokasi direktori tempat script 'gayo' ini berada, supaya
+# 'gayoc' (compiler) bisa ditemukan walau 'gayo' dipanggil dari
+# direktori manapun / lewat symlink di PATH.
+SUMBER="${BASH_SOURCE[0]}"
+while [ -h "$SUMBER" ]; do
+    DIR="$(cd -P "$(dirname "$SUMBER")" >/dev/null 2>&1 && pwd)"
+    SUMBER="$(readlink "$SUMBER")"
+    [[ $SUMBER != /* ]] && SUMBER="$DIR/$SUMBER"
+done
+DIR_GAYO="$(cd -P "$(dirname "$SUMBER")" >/dev/null 2>&1 && pwd)"
+GAYOC="$DIR_GAYO/gayoc"
+
+if [ ! -x "$GAYOC" ]; then
+    echo "Error: compiler 'gayoc' tidak ditemukan di $DIR_GAYO" >&2
+    echo "Jalankan 'make' dulu di folder proyek untuk membangun compiler-nya." >&2
+    exit 1
+fi
+
+if [ $# -lt 1 ]; then
+    echo "Cara pakai: gayo namafile.gy [-o output] [--asm]" >&2
+    echo "            gayo --version | -V" >&2
+    exit 1
+fi
+
+FILE_GY="$1"
+shift
+
+if [ ! -f "$FILE_GY" ]; then
+    echo "Error: file '$FILE_GY' tidak ditemukan" >&2
+    exit 1
+fi
+
+MODE="jalankan"
+OUTPUT_BINER=""
+
+while [ $# -gt 0 ]; do
+    case "$1" in
+        -o)
+            MODE="simpan"
+            OUTPUT_BINER="$2"
+            shift 2
+            ;;
+        --asm)
+            MODE="asm"
+            shift
+            ;;
+        *)
+            echo "Opsi tidak dikenal: $1" >&2
+            exit 1
+            ;;
+    esac
+done
+
+# Direktori sementara untuk file hasil kompilasi antara (.asm, .o)
+TMPDIR_GAYO="$(mktemp -d)"
+trap 'rm -rf "$TMPDIR_GAYO"' EXIT
+
+NAMA_DASAR="$(basename "$FILE_GY" .gy)"
+FILE_ASM="$TMPDIR_GAYO/$NAMA_DASAR.asm"
+FILE_OBJ="$TMPDIR_GAYO/$NAMA_DASAR.o"
+
+# --- Tahap 1: gayoc (compiler kita) -> assembly ---
+"$GAYOC" "$FILE_GY" "$FILE_ASM" > /dev/null
+
+if [ "$MODE" = "asm" ]; then
+    cat "$FILE_ASM"
+    exit 0
+fi
+
+# --- Tahap 2 & 3: nasm (assemble) + ld (link) -> biner ELF ---
+if ! command -v nasm >/dev/null 2>&1; then
+    echo "Error: 'nasm' tidak ditemukan. Install dulu: sudo apt install nasm" >&2
+    exit 1
+fi
+
+nasm -f elf64 "$FILE_ASM" -o "$FILE_OBJ"
+
+if [ "$MODE" = "simpan" ]; then
+    ld "$FILE_OBJ" -o "$OUTPUT_BINER"
+    echo "Biner disimpan sebagai: $OUTPUT_BINER"
+    exit 0
+fi
+
+FILE_BINER="$TMPDIR_GAYO/$NAMA_DASAR"
+ld "$FILE_OBJ" -o "$FILE_BINER"
+
+# --- Tahap 4: jalankan langsung ---
+"$FILE_BINER"

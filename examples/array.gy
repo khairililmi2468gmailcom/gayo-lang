@@ -1,0 +1,10 @@
+!! Contoh array (tong): jumlahkan semua elemen
+ara angka = tong[4, 8, 15, 16, 23, 42];
+ara total = 0;
+ara i = 0;
+iwan (i lebih kucak 6) {
+    total = total tamah angka[i];
+    i = i tamah 1;
+}
+turuhen "Total semua elemen:";
+turuhen total;
