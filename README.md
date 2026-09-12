@@ -27,8 +27,6 @@ program.gy  →  gayoc (compiler, ditulis dalam C)  →  assembly x86-64
             →  dijalankan LANGSUNG oleh CPU
 ```
 
-Tidak ada Python, Node, JVM, atau interpreter apa pun yang ikut berjalan saat program Gayo dieksekusi. Compiler (`gayoc`) hanya dipakai *sekali* untuk menerjemahkan kode `.gy` menjadi assembly; hasil akhirnya adalah program mandiri.
-
 ## Instalasi
 
 Butuh: `gcc`, `nasm`, `ld` (biasanya sudah ada di Linux, atau lewat `build-essential` + `nasm`).
