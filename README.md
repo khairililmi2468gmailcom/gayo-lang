@@ -205,4 +205,4 @@ Gayo dicetuskan dan dikembangkan oleh **Khairil Ilmi**.
 
 ## Lisensi
 
-Belum ditentukan — tambahkan file `LICENSE` sesuai preferensimu sebelum publish (MIT umum dipakai untuk proyek bahasa pemrograman hobi).
+Proyek ini menggunakan **MIT License**. Lihat file [`LICENSE`](LICENSE) untuk informasi lengkap mengenai ketentuan lisensi.
