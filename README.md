@@ -170,23 +170,6 @@ Lihat [`examples/`](examples/):
 - `fizzbuzz.gy` — FizzBuzz klasik
 - `array.gy` — operasi array
 
-## Batasan saat ini & Roadmap
-
-Ditulis apa adanya supaya tidak menyesatkan siapa pun yang membaca kode ini:
-
-- [ ] **`isen` (konstanta)** — belum ada pengecekan error kalau nilainya diubah setelah dideklarasikan.
-- [ ] **Aritmatika `arakoma` (pecahan)** — nilai bisa disimpan & dicetak, tapi operasi matematika (`tamah`, `kali`, dst) belum berfungsi untuknya. Butuh implementasi instruksi SSE/FPU x86-64.
-- [ ] **Variabel lokal bertipe teks/boolean/array di dalam fungsi** — saat ini variabel di dalam fungsi hanya mendukung tipe angka (`bulet`). Teks, array, dll hanya bisa jadi variabel global.
-- [ ] **`colok` (switch/case)** — belum diimplementasikan.
-- [ ] **`ulangen`/`bueten` (do-while)** — belum diimplementasikan.
-- [ ] **`ayun`/`bacan` (input dari user)** — belum diimplementasikan (program Gayo saat ini hanya bisa mencetak, belum membaca input).
-- [ ] **OOP (`kelas`, `ayu`, `ini`, `diri`, `warisen`)** — belum diimplementasikan. Ini perubahan besar (butuh vtable, layout memori objek).
-- [ ] **Penanganan error (`coba`, `tengkam`, `geralungen`, `ahire`)** — belum diimplementasikan. Butuh mekanisme *stack unwinding*.
-- [ ] **Modul (`ajak`, `tangkuhen`, `buku`)** — belum diimplementasikan. Program Gayo saat ini hanya satu file.
-- [ ] **Operasi string** (penggabungan, dll) — string saat ini hanya bisa disimpan & dicetak apa adanya.
-- [ ] **Self-hosting** — tujuan jangka panjang: menulis ulang `gayoc` dalam bahasa Gayo sendiri, supaya C tidak dibutuhkan lagi sama sekali untuk membangun compiler generasi berikutnya.
-
-Kontribusi untuk mengisi bagian-bagian di atas sangat diterima.
 
 ## Struktur proyek
 
