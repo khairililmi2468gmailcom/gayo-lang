@@ -2,7 +2,7 @@
 
 <img src="image/gayolang.png" alt="Gayo Programming Language" width="420">
 
-# Gayo
+# Gayo Programming Language
 
 ### Native Programming Language from Aceh
 
